@@ -92,6 +92,19 @@ fs.createReadStream('test.sdf')
   });
 ```
 
+### async iterator
+
+Use a Javascript asynchronous iterator to access entries individually.
+
+```js
+const { molecules } = require('sdf-parser');
+const entryStream = fs.createReadStream('test.sdf')
+  .pipe(molecules());
+for await (const mol in entryStream) {
+  // mol is each entry in turn
+}
+```
+
 ## License
 
 [MIT](./LICENSE)
