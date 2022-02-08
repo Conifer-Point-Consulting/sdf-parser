@@ -88,7 +88,7 @@ const { molecules } = require('sdf-parser');
 const moleculeStream = fs.createReadStream('test.sdf')
   .pipe(molecules());
 for await (const mol in moleculeStream) {
-  await asyncMoleculeProcessing(mol);
+  await asyncHandleMolecule(mol);
 }
 ```
 
