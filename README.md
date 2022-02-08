@@ -79,6 +79,19 @@ fs.createReadStream('test.sdf')
   });
 ```
 
+#### With async iterator
+
+Use JavaScript asynchronous iterator to ensure completion of async handling before continuing.
+
+```js
+const { molecules } = require('sdf-parser');
+const moleculeStream = fs.createReadStream('test.sdf')
+  .pipe(molecules());
+for await (const mol in moleculeStream) {
+  await asyncMoleculeProcessing(mol);
+}
+```
+
 ### entries()
 
 Transform an input text stream to a stream of sdf entries.
@@ -90,19 +103,6 @@ fs.createReadStream('test.sdf')
   .on('data', (entry) => {
     // sdf entry as a string
   });
-```
-
-### async iterator
-
-Use a Javascript asynchronous iterator to access entries individually.
-
-```js
-const { molecules } = require('sdf-parser');
-const entryStream = fs.createReadStream('test.sdf')
-  .pipe(molecules());
-for await (const mol in entryStream) {
-  // mol is each entry in turn
-}
 ```
 
 ## License
